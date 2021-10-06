@@ -1,0 +1,79 @@
+ // i= 0;
+            con.Open();
+            
+            
+            MySqlCommand cmd = new MySqlCommand("SELECT login_user, senha_user FROM cad_user WHERE  login_user=@login_user AND senha_user=@senha_user", con);
+
+            cmd.Parameters.AddWithValue("@login_user", txtLogin.Text);
+            cmd.Parameters.AddWithValue("@senha_user", txtSenha.Text);
+
+
+            MySqlDataReader sdr = cmd.ExecuteReader();
+           
+            if (sdr.Read())
+            {
+                MessageBox.Show("Login realizado com sucesso!");
+                menu menu = new menu();
+                menu.Show();
+            }
+            else
+            {
+                MessageBox.Show("Usuário ou senha inválido");
+            }
+            con.Close();
+
+            // cmd.ExecuteNonQuery();
+            // DataTable dt = new DataTable();
+            //MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            //da.Fill(dt);
+            //i = Convert.ToInt32(dt.Rows.Count.ToString());
+
+            // if (i==1)
+            //{
+
+            //menu menu = new menu();
+            //menu.Show();
+            //MessageBox.Show("");
+            //}
+            // else
+            //{
+            // MessageBox.Show("Usuário ou senha inválido");
+            //}
+
+
+            // con.Close();
+
+========================================================
+
+combobox
+
+
+
+
+
+MySqlConnection cn = new MySqlConnection();
+            cn.ConnectionString = ("Server = localhost; Database = bd3; Uid = root; Pwd =;");
+            cn.Open();
+            MySqlCommand com = new MySqlCommand();
+            com.Connection = cn;
+            com.CommandText = "SELECT nome_prof FROM cad_professor";
+            MySqlDataReader dr = com.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            cmbProfessor.DisplayMember = "nome_prof";
+            cmbProfessor.DataSource = dt;
+
+
+
+
+            MySqlConnection cn2 = new MySqlConnection();
+            cn2.ConnectionString = ("Server = localhost; Database = bd3; Uid = root; Pwd =;");
+            cn2.Open();
+            MySqlCommand comm = new MySqlCommand();
+            comm.Connection = cn2;
+            comm.CommandText = "SELECT key_desc FROM cad_key";
+            MySqlDataReader drr = comm.ExecuteReader();
+            DataTable dtt = new DataTable();
+            dtt.Load(drr);
+            cmbKey.DisplayMember = "key_desc";
+            cmbKey.DataSource = dtt;
